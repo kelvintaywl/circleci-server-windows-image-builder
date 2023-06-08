@@ -58,6 +58,12 @@ You can use either AWS or GCP to build your Windows machine image. Choose the on
 
 5. You will find your new Windows image ID at the end of the `summarize results` step in the job output.
 
+#### Docker Hub Registry Mirror
+
+This Packer configuration supports adding a DockerHub registry mirror.
+Set a DOCKERHUB_REGISTRY_MIRROR environment variable (e.g., in your org context) pointing to your registry mirror.
+For more information, see the [configure-docker-daemon.ps1](windows/provision-scripts/configure-docker-daemon.ps1) provisioning script.
+
 ### Common troubleshooting
 
 * If you get any errors around not being able to find a default VPC, you will need to specify `vpc_id`, `subnet_id` (both for AWS) or `subnetwork` (for GCP) in `windows/visual-studio/packer.yaml`.
