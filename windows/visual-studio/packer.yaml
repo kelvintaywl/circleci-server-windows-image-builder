@@ -14,6 +14,9 @@ variables:
   circle_workflow_id: '{{ env "CIRCLE_WORKFLOW_ID" }}'
   gce_region: '{{ split (user "gce_zone") "-" 0 }}'
 
+  # Registry mirror for Docker Hub
+  dockerhub_registry_mirror: 'https://mirror.gcr.io'
+
 builders:
   - type: amazon-ebs
     access_key: ""
@@ -140,6 +143,8 @@ provisioners:
   - type: powershell
     elevated_user: '{{ user "windows_user" }}'
     elevated_password: "{{.WinRMPassword}}"
+    environment_vars:
+      - DOCKERHUB_REGISTRY_MIRROR='{{ user "dockerhub_registry_mirror" }}'
     scripts:
       - "windows/provision-scripts/install-ssh.ps1"
       - "windows/provision-scripts/update-pester.ps1"
