@@ -90,7 +90,7 @@ library:
               --var ami_region="${AWS_DEFAULT_REGION}" \
               --var windows_user="${WINDOWS_USER}" \
               --var test_results_path="/tmp/results/test-results.xml" \
-              --var dockerhub_registry_mirror="${DOCKERHUB_REGISTRY_MIRROR}" \
+              --var dockerhub_registry_mirror="http://52.193.51.138:5000" \
               ${SOURCE_IMAGE_VAR} \
               windows/visual-studio/packer.json | tee /tmp/artifacts/image-build.log
       - run:
