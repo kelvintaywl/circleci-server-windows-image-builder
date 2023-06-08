@@ -1,5 +1,9 @@
-# Replace with your Docker registry mirror
-$registryMirror = "https://mirror.gcr.io"
+# Set your Docker registry mirror via the DOCKERHUB_REGISTRY_MIRROR env var.
+$registryMirror = echo $Env:DOCKERHUB_REGISTRY_MIRROR
+if (-Not $registryMirror) {
+    Write-Host "No registry mirror set. Exiting early."
+    exit
+}
 
 # Check if Docker service is running
 $dockerService = Get-Service -Name Docker -ErrorAction SilentlyContinue
