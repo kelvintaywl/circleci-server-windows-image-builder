@@ -143,8 +143,10 @@ provisioners:
   - type: powershell
     elevated_user: '{{ user "windows_user" }}'
     elevated_password: "{{.WinRMPassword}}"
+    # Packer will quote strings by default
+    # See https://developer.hashicorp.com/packer/docs/provisioners/shell#env_var_format
     environment_vars:
-      - DOCKERHUB_REGISTRY_MIRROR='{{ user "dockerhub_registry_mirror" }}'
+      - DOCKERHUB_REGISTRY_MIRROR={{ user "dockerhub_registry_mirror" }}
     scripts:
       - "windows/provision-scripts/install-ssh.ps1"
       - "windows/provision-scripts/update-pester.ps1"
